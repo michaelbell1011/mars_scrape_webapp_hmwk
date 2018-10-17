@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Mission to Mars</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="jumbotron text-center">
+      <h1>Mission to Mars</h1>
+      <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New MARS Data</a></p>
+    </div>
+  </div>
+
+  <!-- MARS data -->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 col-md-offset-1">
+        <h2>Latest Mars News</h2>
+        <!-- inserting dynamic paragraph text from scraped data -->
+        <h3><i>{{ marsCollection.news_title }}</i></h3>
+        <p>{{ marsCollection.news_p }}</p>
+        <hr>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-7  col-md-offset-1">
+        <h2>Featured Image</h2>
+        <!-- snytax for inserting an image -->
+        <img src= {{ marsCollection.featured_image_url }} class = "img-responsive" />
+      </div>
+
+      <div class="col-md-4">
+        <div style = "border-style: solid; border-width: 1px; padding: 5px">
+          <h3>Current Weather on Mars</h3>
+          <!-- inserting dynamic paragraph text from scraped data -->
+          <p>{{marsCollection.mars_weather}}</p>
+        </div>
+
+        <div>
+          <h3>Mars Planet Profile</h3>
+          <!-- inserting dynamic paragraph text from scraped data -->
+          <table>
+            {{marsCollection.facts_html | safe}}
+          </table>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <br>
+    <div class="container-fluid">
+      <!-- hemishpere images -->
+      <div class="row">
+        <h3 style="text-align: center">Mars Hemisphere Images</h3>
+        {% for image in marsCollection.hemisphere_image_urls %}
+          <div class="col-md-6">
+            <h4>{{ image.title }}</h4>
+            <img src= {{ image.img_url }} class = "img-responsive" />
+            <hr>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+      <!-- <div class="row">
+          <div class="col-sm-6">
+            <img src= {{ marsCollection.featured_image_url }} class = "img-responsive" />
+          </div>
+          <div class="col-sm-6">
+              <img src= {{ marsCollection.featured_image_url }} class = "img-responsive" />
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-sm-6">
+            <img src= {{ marsCollection.featured_image_url }} class = "img-responsive" />
+          </div>
+          <div class="col-sm-6">
+              <img src= {{ marsCollection.featured_image_url }} class = "img-responsive" />
+          </div>
+      </div> -->
+    
+  </div>
+
+</body>
+</html>
+
